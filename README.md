@@ -1,41 +1,88 @@
-# Vagrant::Dns::Route53
+Vagrant::Dns::Route53
+=====================
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/vagrant/dns/route53`. To experiment with that code, run `bin/console` for an interactive prompt.
+Vagrant Plugin to manage AWS Route53 DNS Records
 
-TODO: Delete this and the text above, and describe your gem
 
-## Installation
 
-Add this line to your application's Gemfile:
+# Installation
 
-```ruby
-gem 'vagrant-dns-route53'
+```
+vagrant plugin install vagrant-dns-route53
 ```
 
-And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install vagrant-dns-route53
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake false` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec vagrant-dns-route53` to use the gem in this directory, ignoring other installed copies of this gem.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vagrant-dns-route53.
+# Usage
 
 
-## License
+## Hostname and Aliases
+
+The hostname and any aliases will be used to create records on route53
+
+```
+config.vm.hostname = "www.example.com"
+config.hostsupdater.aliases = ["alias.example.com", "alias2.example.com"]
+```
+
+
+## Route53
+
+```
+config.route53.access_key_id     = "a1b2c3d4e5f6"
+config.route53.secret_access_key = "a1b2c3d4e5f6"
+config.route53.zone_id           = "a1b2c3d4e5f6"
+```
+
+
+## Network
+
+This plugin works only for `:private_network` and `:public_network` utilizing a *static* ip address
+
+```
+config.vm.network :private_network, ip: "192.168.1.100"
+```
+
+or
+
+```
+config.vm.network :public_network, bridge: "wlan0", ip: "192.168.1.100"
+```
+
+
+## Skipping a network
+
+To skip a network, add `route53: "skip"` option to network configuration:
+
+```
+config.vm.network "private_network", ip: "192.168.1.100", route53: "skip"
+```
+
+
+## Adding/Removing Records on Suspend/Halt
+
+```
+config.route53.enable_suspend_resume = true
+```
+
+
+# Caveats
+
+- Only supports static IP addresses
+- Only supports one domain/zone
+
+
+# Sponsors
+
+This plugin was made possible by [Shiftgig](https://www.shiftgig.com)
+
+
+# Contributing
+
+Pull Requests are welcome, bug reports less so.
+I don't code much ruby, so I hope someone with more experience can clean things up maybe?
+
+
+# License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 

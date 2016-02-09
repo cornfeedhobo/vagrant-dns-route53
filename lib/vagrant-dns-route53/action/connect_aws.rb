@@ -34,7 +34,7 @@ module VagrantPlugins
                     env[:ui].info("[vagrant-dns-route53] Skipping route53 entries for #{ip}")
                   else
                     aliases.each do |hostname|
-                      env[:alias_map][hostname] = ip
+                      env[:alias_map][hostname] = ip if !ip.nil?
                     end
                   end
                 end
