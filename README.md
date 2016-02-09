@@ -21,7 +21,7 @@ The hostname and any aliases will be used to create records on route53
 
 ```
 config.vm.hostname = "www.example.com"
-config.hostsupdater.aliases = ["alias.example.com", "alias2.example.com"]
+config.route53.aliases = ["alias.example.com", "alias2.example.com"]
 ```
 
 
