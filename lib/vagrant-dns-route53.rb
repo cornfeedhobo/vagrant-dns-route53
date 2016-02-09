@@ -1,5 +1,6 @@
 require "pathname"
 require "vagrant-dns-route53/version"
+require "vagrant-dns-route53/plugin"
 
 module VagrantPlugins
   module Dns

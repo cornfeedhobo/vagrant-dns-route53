@@ -23,7 +23,7 @@ module VagrantPlugins
 
         # This initializes the internationalization strings.
         def self.setup_i18n
-          I18n.load_path << File.expand_path("locales/en.yml", DnsRoute53.source_root)
+          I18n.load_path << File.expand_path("locales/en.yml", Route53.source_root)
           I18n.reload!
         end
 
