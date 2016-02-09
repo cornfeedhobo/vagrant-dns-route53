@@ -1,0 +1,16 @@
+en:
+  vagrant_dns_route53:
+    config:
+      zone_id_required: |-
+        A zone ID must be specified via "zone_id"
+      access_key_id_required: |-
+        An access key ID must be specified via "access_key_id"
+      secret_access_key_required: |-
+        A secret access key is required via "secret_access_key"
+
+    errors:
+      fog_error: |-
+        There was an error talking to AWS. The error message is shown below:
+
+        %{message}
+
