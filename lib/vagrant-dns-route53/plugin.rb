@@ -63,29 +63,29 @@ module VagrantPlugins
           Config
         end
 
-        #action_hook(:CreateRecords, :machine_action_up) do |hook|
-        #  hook.append(Action.create_records)
-        #end
+        action_hook(:CreateRecords, :machine_action_up) do |hook|
+          hook.append(Action.create_records)
+        end
 
-        #action_hook(:DeleteRecords, :machine_action_destroy) do |hook|
-        #  hook.append(Action.delete_records)
-        #end
+        action_hook(:DeleteRecords, :machine_action_destroy) do |hook|
+          hook.append(Action.delete_records)
+        end
 
-        #action_hook(:ReloadRecords, :machine_action_resume) do |hook|
-        #  hook.append(Action.reload_records)
-        #end
+        action_hook(:ReloadRecords, :machine_action_resume) do |hook|
+          hook.append(Action.reload_records)
+        end
 
-        #action_hook(:DeleteRecords, :machine_action_halt) do |hook|
-        #  hook.append(Action.delete_records)
-        #end
+        action_hook(:DeleteRecords, :machine_action_halt) do |hook|
+          hook.append(Action.delete_records)
+        end
 
-        #action_hook(:DeleteRecords, :machine_action_suspend) do |hook|
-        #  hook.append(Action.delete_records)
-        #end
+        action_hook(:DeleteRecords, :machine_action_suspend) do |hook|
+          hook.append(Action.delete_records)
+        end
 
-        #action_hook(:ReloadRecords, :machine_action_resume) do |hook|
-        #  hook.append(Action.reload_records)
-        #end
+        action_hook(:ReloadRecords, :machine_action_resume) do |hook|
+          hook.append(Action.reload_records)
+        end
       end
     end
   end
