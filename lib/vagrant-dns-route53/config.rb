@@ -56,7 +56,7 @@ module VagrantPlugins
         end
 
         def finalize!
-          @enable                = true  if @enable                == UNSET_VALUE
+          @enable                = false if @enable                == UNSET_VALUE
           @enable_suspend_resume = false if @enable_suspend_resume == UNSET_VALUE
           @version               = nil   if @version               == UNSET_VALUE
           @zone_id               = nil   if @zone_id               == UNSET_VALUE
@@ -72,7 +72,7 @@ module VagrantPlugins
         def validate(machine)
           errors = _detected_errors
 
-          errors << I18n.t("vagrant-dns-route53.config.zone_id_required") if @zone_id.nil?
+          errors << I18n.t("vagrant_dns_route53.config.zone_id_required") if @zone_id.nil?
           errors << I18n.t("vagrant_dns_route53.config.access_key_id_required") if @access_key_id.nil?
           errors << I18n.t("vagrant_dns_route53.config.secret_access_key_required") if @secret_access_key.nil?
 

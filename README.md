@@ -14,6 +14,15 @@ vagrant plugin install vagrant-dns-route53
 
 # Usage
 
+- [optional] `enable` Toggles the plugin (default: false)
+- [optional] `enable_suspend_resume` Toggles adding/removing records upon suspend/resume (default: false)
+- [optional] `version` AWS api version to use. Don't set unless you know what you are doing
+- [required] `access_key_id` The access key ID for accessing AWS
+- [required] `secret_access_key` The secret access key for accessing AWS
+- [optional] `session_token` The token associated with the key for accessing AWS
+- [required] `zone_id` The Route53 Zone ID
+- [optional] `aliases` The aliases to insert to the specified Zone
+
 
 ## Hostname and Aliases
 
