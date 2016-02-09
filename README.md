@@ -78,8 +78,7 @@ This plugin was made possible by [Shiftgig](https://www.shiftgig.com)
 
 # Contributing
 
-Pull Requests are welcome, bug reports less so.
-I don't code much ruby, so I hope someone with more experience can clean things up maybe?
+Pull Requests are welcome. I don't code much ruby, so I hope someone with more experience can clean things up maybe?
 
 
 # License
