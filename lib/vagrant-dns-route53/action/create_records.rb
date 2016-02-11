@@ -24,19 +24,31 @@ module VagrantPlugins
 
                 record_name = hostname + "." unless hostname.end_with?(".")
 
-                zone = env[:route53].zones.get(env[:machine].config.route53.zone_id)
-                record = zone.records.get(record_name)
+                begin
+                  zone = env[:route53].zones.get(env[:machine].config.route53.zone_id)
+                  record = zone.records.get(record_name)
+                rescue Fog::DNS::AWS::Error => err
+                  @logger.info("AWS error: #{err.message}")
+                  env[:ui].info("AWS error: #{err.message}")
+                end
 
                 if record.nil? || record.attributes[:name] != record_name
                   @logger.info("Creating Route53 record...")
                   env[:ui].info("Creating Route53 record...")
-                  new_record = zone.records.new({
-                    :value => ip,
-                    :name  => record_name,
-                    :type  => "A",
-                    :ttl   => "60"
-                  })
-                  new_record.save
+
+                  begin
+                    new_record = zone.records.new({
+                      :value => ip,
+                      :name  => record_name,
+                      :type  => "A",
+                      :ttl   => "60"
+                    })
+                    new_record.save
+                  rescue Fog::DNS::AWS::Error => err
+                    @logger.info("AWS error: #{err.message}")
+                    env[:ui].info("AWS error: #{err.message}")
+                  end
+
                 elsif record.attributes[:value][0] != ip
                   @logger.info("Route53 Record already exists for #{hostname}. Please update manually. Skipping...")
                   env[:ui].info("Route53 Record already exists for #{hostname}. Please update manually. Skipping...")

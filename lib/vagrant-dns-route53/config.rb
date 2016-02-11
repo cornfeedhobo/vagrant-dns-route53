@@ -72,9 +72,11 @@ module VagrantPlugins
         def validate(machine)
           errors = _detected_errors
 
-          errors << I18n.t("vagrant_dns_route53.config.zone_id_required") if @zone_id.nil?
-          errors << I18n.t("vagrant_dns_route53.config.access_key_id_required") if @access_key_id.nil?
-          errors << I18n.t("vagrant_dns_route53.config.secret_access_key_required") if @secret_access_key.nil?
+          if @enable
+            errors << I18n.t("vagrant_dns_route53.config.zone_id_required") if @zone_id.nil?
+            errors << I18n.t("vagrant_dns_route53.config.access_key_id_required") if @access_key_id.nil?
+            errors << I18n.t("vagrant_dns_route53.config.secret_access_key_required") if @secret_access_key.nil?
+          end
 
           { "DNS Route53" => errors }
         end

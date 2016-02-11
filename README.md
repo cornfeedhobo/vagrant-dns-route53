@@ -80,6 +80,30 @@ config.route53.enable_suspend_resume = true
 - Only supports one domain/zone
 
 
+# IAM Permissions
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "route53:CreateHostedZone",
+                "route53:GetHostedZone",
+                "route53:ListHostedZones",
+                "route53:ChangeResourceRecordSets",
+                "route53:ListResourceRecordSets"
+            ],
+            "Resource": [
+                "arn:aws:route53:::hostedzone/1A2B3C4D5E6F"
+            ]
+        }
+    ]
+}
+```
+
+
 # Sponsors
 
 This plugin was made possible by [Shiftgig](https://www.shiftgig.com)

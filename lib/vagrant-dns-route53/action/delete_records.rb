@@ -24,14 +24,26 @@ module VagrantPlugins
 
                 record_name = hostname + "." unless hostname.end_with?(".")
 
-                zone = env[:route53].zones.get(env[:machine].config.route53.zone_id)
-                record = zone.records.get(record_name)
+                begin
+                  zone = env[:route53].zones.get(env[:machine].config.route53.zone_id)
+                  record = zone.records.get(record_name)
+                rescue Fog::DNS::AWS::Error => err
+                  @logger.info("AWS error: #{err.message}")
+                  env[:ui].info("AWS error: #{err.message}")
+                end
 
                 if !record.nil? && record.attributes[:name] == record_name
                   if record.attributes[:value][0] == ip
                     @logger.info("Deleting Route53 record for '#{hostname}'...")
                     env[:ui].info("Deleting Route53 record for '#{hostname}'...")
-                    record.destroy
+
+                    begin
+                      record.destroy
+                    rescue Fog::DNS::AWS::Error => err
+                      @logger.info("AWS error: #{err.message}")
+                      env[:ui].info("AWS error: #{err.message}")
+                    end
+
                   elsif record.attributes[:value][0] != ip
                     @logger.info("Route53 record does not match. Expected '#{ip}' got '#{record.attributes[:value][0]}'. Please update manually...")
                     env[:ui].info("Route53 record does not match. Expected '#{ip}' got '#{record.attributes[:value][0]}'. Please update manually...")
