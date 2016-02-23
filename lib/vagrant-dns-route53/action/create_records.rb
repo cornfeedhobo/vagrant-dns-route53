@@ -55,6 +55,8 @@ module VagrantPlugins
                 end
               end
             end
+
+            @app.call(env)
           end
         end
       end
